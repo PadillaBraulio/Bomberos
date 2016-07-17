@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bomberos</string>
+    <!-- activity main -->
+    <string name="Text1">Ingrese el número de ambulancia</string>
+    <string name="Text2">Buscar</string>
+    <!-- SharedData keys -->
+    <string name="AmbulanceNUmber">Ambulance</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
