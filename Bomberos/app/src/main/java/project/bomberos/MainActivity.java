@@ -2,7 +2,9 @@ package project.bomberos;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -122,7 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(s.size()>0){
                 String latitude = s.get(0).getLatitude();
                 String longitude = s.get(0).getLongitude();
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + "," + longitude );
+                Toast.makeText(getApplicationContext(),"EMERGENCIA tel: " + s.get(0).getTelefone()
+                        + " ambulance : " + s.get(0).getAmbulance() +
+                        " Fecha : " + s.get(0).getDate(),Toast.LENGTH_SHORT).show();
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + "," + longitude);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW,gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if(mapIntent.resolveActivity(getPackageManager()) != null){
