@@ -23,6 +23,6 @@ public class SharedData {
     }
     protected String getAmbulanceNumber(){
         String AmbulanceNumber = context.getString(R.string.AmbulanceNUmber);
-        return sharedPref.getString(AmbulanceNumber, null);
+        return sharedPref.getString(AmbulanceNumber, "");
     }
 }
