@@ -76,7 +76,7 @@ public class RequestEmergency {
         }
         return forecastJsonStr;
     }
-    public  List<MainActivity.DataEmergency> readJson(String jsonStr){
+    public  List<EmergencyItem> readJson(String jsonStr){
 
         try {
             Log.i("info",jsonStr);
@@ -91,8 +91,8 @@ public class RequestEmergency {
         return null;
     }
 
-    private List<MainActivity.DataEmergency> readMessagesArray(JsonReader reader) throws IOException {
-        List<MainActivity.DataEmergency> data = new ArrayList<MainActivity.DataEmergency>();
+    private List<EmergencyItem> readMessagesArray(JsonReader reader) throws IOException {
+        List<EmergencyItem> data = new ArrayList<EmergencyItem>();
 
         reader.beginArray();
         while (reader.hasNext()) {
@@ -102,7 +102,7 @@ public class RequestEmergency {
         reader.close();
         return data;
     }
-    private MainActivity.DataEmergency readMessage(JsonReader reader) throws IOException {
+    private EmergencyItem readMessage(JsonReader reader) throws IOException {
         String id = "";
         String latitude = "";
         String longitude = "";
@@ -130,7 +130,7 @@ public class RequestEmergency {
             }
         }
         reader.endObject();
-        return new MainActivity.DataEmergency(id, latitude, longitude, phone, date, ambulance);
+        return new EmergencyItem(id, latitude, longitude, phone, date, ambulance);
     }
 
 }

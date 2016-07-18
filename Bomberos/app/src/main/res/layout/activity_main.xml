@@ -48,5 +48,13 @@
         android:visibility="gone"
         android:layout_marginTop="50dp" />
 
+    <ImageSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageSwitcher"
+        android:layout_above="@+id/TextAmbulanceNumber"
+        android:layout_toLeftOf="@+id/TextAmbulanceNumber"
+        android:layout_toStartOf="@+id/TextAmbulanceNumber" />
+
 
 </RelativeLayout>

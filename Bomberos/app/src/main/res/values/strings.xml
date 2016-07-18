@@ -20,4 +20,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Strings fragment item -->
+    <string name="default_phone">telefono 55888288</string>
+    <string name="default_date">fecha: 14 de abril del 2016</string>
+    <string name="default_latitude">latitude: 14.78597</string>
+    <string name="default_longitude">longtude: -90.78597</string>
 </resources>

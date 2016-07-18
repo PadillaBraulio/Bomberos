@@ -3,6 +3,8 @@ package project.bomberos;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText ambulanceNumberText;
     private SharedData Data ;
     private ProgressBar mprogressBar;
+    public static List<EmergencyItem> items = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +99,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class SearchEmergencyTask extends AsyncTask<String, Void, List<DataEmergency>> {
+    private class SearchEmergencyTask extends AsyncTask<String, Void, List<EmergencyItem>> {
 
 
         @Override
-        protected List<DataEmergency> doInBackground(String... params) {
+        protected List<EmergencyItem> doInBackground(String... params) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -112,9 +117,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        protected void onPostExecute(List<DataEmergency> s) {
+        protected void onPostExecute(List<EmergencyItem> s) {
             showProgress(false);
             if(s.size()>0){
+                String latitude = s.get(0).getLatitude();
+                String longitude = s.get(0).getLongitude();
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + "," + longitude );
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW,gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if(mapIntent.resolveActivity(getPackageManager()) != null){
+                    startActivity(mapIntent);
+                }
 
             }
 
@@ -122,45 +135,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public static class DataEmergency {
-        private final String id;
-        private final String latitude;
-        private final String longitude;
-        private final String telefone;
-        private final String date;
-        private final String ambulance;
-
-        public DataEmergency(String id, String latitude, String longitude, String telefone, String date, String ambulance) {
-            this.id = id;
-            this.latitude = latitude;
-            this.longitude = longitude;
-            this.telefone = telefone;
-            this.date = date;
-            this.ambulance = ambulance;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getLatitude() {
-            return latitude;
-        }
-
-        public String getLongitude() {
-            return longitude;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public String getTelefone() {
-            return telefone;
-        }
-
-        public String getAmbulance() {
-            return ambulance;
-        }
-    }
 }
